@@ -68,5 +68,8 @@ TW_INCLUDE_JB_CRYPTO := true
 # Workaround for factory issue
 BOARD_VOLD_CRYPTFS_MIGRATE := true
 
+BOARD_NFC_CHIPSET := pn547
+BOARD_NFC_HAL_SUFFIX := bacon
+
 # inherit from the proprietary version
 -include vendor/oneplus/bacon/BoardConfigVendor.mk
