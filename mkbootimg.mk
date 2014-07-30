@@ -3,7 +3,7 @@ LOCAL_PATH := $(call my-dir)
 ## THIS IS A DEFAULT: YOU SHOULD OVERRIDE IT FROM THE DEVICE-SPECIFIC
 ## BoardConfig. Check the kernel's arch/arm/boot/dts/ path for possible
 ## values.
-G2_DTS_TARGET ?= msm8974pro-*-a0001
+MSM8974_DTS_TARGET ?= msm8974pro-
 
 
 ## Don't change anything under here. The variables are named G2_whatever
@@ -12,19 +12,19 @@ G2_DTS_TARGET ?= msm8974pro-*-a0001
 
 ## Imported from the original makefile...
 KERNEL_CONFIG := $(KERNEL_OUT)/.config
-G2_DTS_NAMES := msm8974
+MSM8974_DTS_NAMES := msm8974
 
-G2_DTS_FILES = $(wildcard $(TOP)/$(TARGET_KERNEL_SOURCE)/arch/arm/boot/dts/$(G2_DTS_TARGET)*.dts)
-G2_DTS_FILE = $(lastword $(subst /, ,$(1)))
-DTB_FILE = $(addprefix $(KERNEL_OUT)/arch/arm/boot/,$(patsubst %.dts,%.dtb,$(call G2_DTS_FILE,$(1))))
-ZIMG_FILE = $(addprefix $(KERNEL_OUT)/arch/arm/boot/,$(patsubst %.dts,%-zImage,$(call G2_DTS_FILE,$(1))))
+MSM8974_DTS_FILES = $(wildcard $(TOP)/$(TARGET_KERNEL_SOURCE)/arch/arm/boot/dts/$(MSM8974_DTS_TARGET)*.dts)
+MSM8974_DTS_FILE = $(lastword $(subst /, ,$(1)))
+DTB_FILE = $(addprefix $(KERNEL_OUT)/arch/arm/boot/,$(patsubst %.dts,%.dtb,$(call MSM8974_DTS_FILE,$(1))))
+ZIMG_FILE = $(addprefix $(KERNEL_OUT)/arch/arm/boot/,$(patsubst %.dts,%-zImage,$(call MSM8974_DTS_FILE,$(1))))
 KERNEL_ZIMG = $(KERNEL_OUT)/arch/arm/boot/zImage
 DTC = $(KERNEL_OUT)/scripts/dtc/dtc
 
-define append-g2-dtb
+define append-msm8974-dtb
 mkdir -p $(KERNEL_OUT)/arch/arm/boot;\
-$(foreach G2_DTS_NAME, $(G2_DTS_NAMES), \
-   $(foreach d, $(G2_DTS_FILES), \
+$(foreach MSM8974_DTS_NAME, $(MSM8974_DTS_NAMES), \
+   $(foreach d, $(MSM8974_DTS_FILES), \
       $(DTC) -p 1024 -O dtb -o $(call DTB_FILE,$(d)) $(d); \
       cat $(KERNEL_ZIMG) $(call DTB_FILE,$(d)) > $(call ZIMG_FILE,$(d));))
 endef
@@ -36,7 +36,7 @@ INSTALLED_DTIMAGE_TARGET := $(PRODUCT_OUT)/dt.img
 
 $(INSTALLED_DTIMAGE_TARGET): $(DTBTOOL) $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr $(INSTALLED_KERNEL_TARGET)
 	@echo -e ${CL_CYN}"Start DT image: $@"${CL_RST}
-	$(call append-g2-dtb)
+	$(call append-msm8974-dtb)
 	$(call pretty,"Target dt image: $(INSTALLED_DTIMAGE_TARGET)")
 	$(hide) $(DTBTOOL) -2 -o $(INSTALLED_DTIMAGE_TARGET) -s $(BOARD_KERNEL_PAGESIZE) -p $(KERNEL_OUT)/scripts/dtc/ $(KERNEL_OUT)/arch/arm/boot/
 	@echo -e ${CL_CYN}"Made DT image: $@"${CL_RST}
