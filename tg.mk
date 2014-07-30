@@ -19,7 +19,7 @@ $(call inherit-product, device/oneplus/bacon/full_bacon.mk)
 PRODUCT_DEVICE := bacon
 PRODUCT_NAME := tg_bacon
 PRODUCT_BRAND := oneplus
-PRODUCT_MODEL := One
+PRODUCT_MODEL := One A0001
 PRODUCT_MANUFACTURER := OnePlus
 
 TARGET_CONTINUOUS_SPLASH_ENABLED := true
