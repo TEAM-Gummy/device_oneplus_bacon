@@ -51,6 +51,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
     $(LOCAL_PATH)/configs/libnfc-brcm.conf:system/etc/libnfc-brcm.conf
 
+# TWRP
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/etc/twrp.fstab:recovery/root/etc/twrp.fstab
+
 # System properties
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_network=20
