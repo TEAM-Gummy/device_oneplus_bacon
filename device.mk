@@ -32,15 +32,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/mixer_paths.xml:system/etc/mixer_paths.xml
 
-# Keylayouts
-PRODUCT_PACKAGES += \
-    $(LOCAL_PATH)/keylayout/atmel_mxt_ts.kl:system/usr/keylayout/atmel_mxt_ts.kl \
-    $(LOCAL_PATH)/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
-
 # NFC packages
 PRODUCT_PACKAGES += \
     NfcNci \
     Tag \
+    nfc_nci.bacon \
     com.android.nfc_extras
 
 # NFC access control + feature files + configuration
